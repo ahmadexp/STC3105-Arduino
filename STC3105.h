@@ -44,6 +44,11 @@
 #define STC_3105_ALM_SOC                0x20
 #define STC_3105_ALM_VOLT               0x40
 
+//Unit values
+#define VOLTAGE_UNIT                    2.44
+#define CURRENT_UNIT                    11.77/0.01
+#define CHARGE_UNIT                     6.70
+
 
 class STC3105
 {
