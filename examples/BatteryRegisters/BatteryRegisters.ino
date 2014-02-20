@@ -31,7 +31,7 @@ void loop()
   Serial.print(counter);
   Serial.print(" \tCurrent: ");
   Serial.print(current);
-  Serial.print(" uA\tVoltage: ");
+  Serial.print(" mA\tVoltage: ");
   Serial.print(voltage);
   Serial.print(" mV\tSOC: ");
   Serial.println(soc);

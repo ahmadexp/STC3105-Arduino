@@ -46,7 +46,7 @@
 
 //Unit values
 #define VOLTAGE_UNIT                    2.44
-#define CURRENT_UNIT                    11.77/0.01
+#define CURRENT_UNIT                    0.01177/0.01
 #define CHARGE_UNIT                     6.70
 
 

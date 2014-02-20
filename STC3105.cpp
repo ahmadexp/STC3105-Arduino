@@ -71,7 +71,7 @@ uint16_t STC3105::readCounter(void)
   return counter;
 }
 
-// reads Current in uA unit
+// reads Current in mA unit
 float STC3105::readCurrent(void)
 {
   int16_t current=((int16_t)readReg(STC_3105_Current_H_address))<<8;
