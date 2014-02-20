@@ -20,9 +20,10 @@ void setup()
 void loop()
 {
   float charge = stc.readCharge();
-  int counter = stc.readCounter();
+  uint16_t counter = stc.readCounter();
   float current = stc.readCurrent();
   float voltage = stc.readVoltage();
+  uint16_t soc = stc.readSOC();
   
   Serial.print("Charge: ");
   Serial.print(charge);
@@ -32,7 +33,8 @@ void loop()
   Serial.print(current);
   Serial.print(" uA\tVoltage: ");
   Serial.print(voltage);
-  Serial.println(" mV");
+  Serial.print(" mV\tSOC: ");
+  Serial.println(soc);
 
   delay(100);
 }

@@ -57,6 +57,7 @@ class STC3105
 
     float    readCharge(void);
     uint16_t readCounter(void);
+    uint16_t readSOC(void);
     float    readCurrent(void);
     float    readVoltage(void);
     void     resetAccumulator(void);

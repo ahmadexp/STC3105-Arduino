@@ -58,8 +58,8 @@ uint8_t STC3105::readReg(uint8_t reg)
 // reads Charge in uVh unit
 float STC3105::readCharge(void)
 {
-  uint16_t charge=((uint16_t)readReg(STC_3105_Charge_H_address))<<8;
-  charge+=(uint16_t)readReg(STC_3105_Charge_L_address);	
+  int16_t charge=((int16_t)readReg(STC_3105_Charge_H_address))<<8;
+  charge+=(int16_t)readReg(STC_3105_Charge_L_address);	
   return (float)charge*6.70;
 }
 
@@ -74,17 +74,25 @@ uint16_t STC3105::readCounter(void)
 // reads Current in uA unit
 float STC3105::readCurrent(void)
 {
-  uint16_t current=((uint16_t)readReg(STC_3105_Current_H_address))<<8;
-  current|=(uint16_t)readReg(STC_3105_Current_L_address);	
+  int16_t current=((int16_t)readReg(STC_3105_Current_H_address))<<8;
+  current|=(int16_t)readReg(STC_3105_Current_L_address);	
   return (float)current*11.77;
 }
 
 // reads voltage in mV unit
 float STC3105::readVoltage(void)
 {
-  uint16_t voltage=((uint16_t)readReg(STC_3105_Voltage_H_address))<<8;
-  voltage|=(uint16_t)readReg(STC_3105_Voltage_L_address);	
+  int16_t voltage=((int16_t)readReg(STC_3105_Voltage_H_address))<<8;
+  voltage|=(int16_t)readReg(STC_3105_Voltage_L_address);	
   return (float)voltage*2.44;
+}
+
+// read the state of charge
+uint16_t STC3105::readSOC(void)
+{
+  int16_t soc=((int16_t)readReg(STC_3105_SOC_Base_H_address))<<8;
+  soc|=(int16_t)readReg(STC_3105_SOC_Base_L_address); 
+  return soc;
 }
 
 void STC3105::resetAccumulator(void)
