@@ -60,7 +60,7 @@ float STC3105::readCharge(void)
 {
   int16_t charge=((int16_t)readReg(STC_3105_Charge_H_address))<<8;
   charge+=(int16_t)readReg(STC_3105_Charge_L_address);	
-  return (float)charge*6.70;
+  return (float)charge*CHARGE_UNIT;
 }
 
 // reads Counter
@@ -76,7 +76,7 @@ float STC3105::readCurrent(void)
 {
   int16_t current=((int16_t)readReg(STC_3105_Current_H_address))<<8;
   current|=(int16_t)readReg(STC_3105_Current_L_address);	
-  return (float)current*11.77;
+  return (float)current*CURRENT_UNIT;
 }
 
 // reads voltage in mV unit
@@ -84,7 +84,7 @@ float STC3105::readVoltage(void)
 {
   int16_t voltage=((int16_t)readReg(STC_3105_Voltage_H_address))<<8;
   voltage|=(int16_t)readReg(STC_3105_Voltage_L_address);	
-  return (float)voltage*2.44;
+  return (float)voltage*VOLTAGE_UNIT ;
 }
 
 // read the state of charge
