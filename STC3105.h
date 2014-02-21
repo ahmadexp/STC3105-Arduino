@@ -59,6 +59,8 @@ class STC3105
 
     void writeReg(uint8_t, uint8_t);
     uint8_t readReg(uint8_t);
+    void writeReg16(uint8_t, int16_t);
+    int16_t readReg16(uint8_t);
 
     float    readCharge(void);
     uint16_t readCounter(void);
@@ -66,6 +68,7 @@ class STC3105
     float    readCurrent(void);
     float    readVoltage(void);
     void     resetAccumulator(void);
+    void     POR(uint8_t);
   private:
     uint8_t  address;
     uint8_t  testWhoAmI(void);

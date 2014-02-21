@@ -55,50 +55,73 @@ uint8_t STC3105::readReg(uint8_t reg)
   return value;
 }
 
+void STC3105::writeReg16(uint8_t reg, int16_t value)
+{
+  Wire.beginTransmission(address);
+  Wire.write(reg);
+  Wire.write(value&0xFF);
+  Wire.write(value>>8);
+  Wire.endTransmission();
+}
+
+// reads register
+int16_t STC3105::readReg16(uint8_t reg)
+{
+  uint16_t value;
+
+  Wire.beginTransmission(address);
+  Wire.write(reg);
+  Wire.endTransmission(false); // restart
+  Wire.requestFrom(address, (uint8_t)2);
+  value = Wire.read();
+  value |= Wire.read()<<8;
+  Wire.endTransmission();
+  return value;
+}
+
 // reads Charge in uVh unit
 float STC3105::readCharge(void)
 {
-  int16_t charge=((int16_t)readReg(STC_3105_Charge_H_address))<<8;
-  charge+=(int16_t)readReg(STC_3105_Charge_L_address);	
-  return (float)charge*CHARGE_UNIT;
+  return (float)readReg16(STC_3105_Charge_L_address)*CHARGE_UNIT;
 }
 
 // reads Counter
 uint16_t STC3105::readCounter(void)
 {
-  uint16_t counter=((uint16_t)readReg(STC_3105_Counter_H_address))<<8;
-  counter|=(uint16_t)readReg(STC_3105_Counter_L_address);	
-  return counter;
+  return readReg16(STC_3105_Counter_L_address);
 }
 
 // reads Current in mA unit
 float STC3105::readCurrent(void)
 {
-  int16_t current=((int16_t)readReg(STC_3105_Current_H_address))<<8;
-  current|=(int16_t)readReg(STC_3105_Current_L_address);	
-  return (float)current*CURRENT_UNIT;
+  return (float)readReg16(STC_3105_Current_L_address)*CURRENT_UNIT;
 }
 
 // reads voltage in mV unit
 float STC3105::readVoltage(void)
 {
-  int16_t voltage=((int16_t)readReg(STC_3105_Voltage_H_address))<<8;
-  voltage|=(int16_t)readReg(STC_3105_Voltage_L_address);	
-  return (float)voltage*VOLTAGE_UNIT ;
+  return (float)readReg16(STC_3105_Voltage_L_address)*VOLTAGE_UNIT ;
 }
 
 // read the state of charge
 uint16_t STC3105::readSOC(void)
 {
-  int16_t soc=((int16_t)readReg(STC_3105_SOC_Base_H_address))<<8;
-  soc|=(int16_t)readReg(STC_3105_SOC_Base_L_address); 
-  return soc;
+  return readReg16(STC_3105_SOC_Base_L_address);
 }
 
 void STC3105::resetAccumulator(void)
 {
   uint8_t tmp=readReg(STC_3105_CTRL_address);	
   writeReg(STC_3105_CTRL_address, tmp|STC_3105_GG_RST);
+}
+
+void STC3105::POR(uint8_t flag)
+{
+  uint8_t tmp=readReg(STC_3105_CTRL_address); 
+  if(flag)
+    writeReg(STC_3105_CTRL_address, tmp&(~STC_3105_PORDET));
+  else
+    writeReg(STC_3105_CTRL_address, tmp|STC_3105_PORDET);
 }
 
 // Private Methods ///////////////////////////////////////////////////

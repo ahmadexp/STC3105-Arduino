@@ -18,12 +18,15 @@ init	KEYWORD2
 enableOperation		KEYWORD2
 writeReg		KEYWORD2
 readReg 	KEYWORD2
+writeReg16		KEYWORD2
+readReg16 	KEYWORD2
 readCharge  	KEYWORD2
 readCounter 	KEYWORD2
 readCurrent 	KEYWORD2
 readVoltage 	KEYWORD2
 resetAccumulator 	KEYWORD2
 readSOC	KEYWORD2
+POR KEYWORD2
 
 STC_3105_MODE_address  LITERAL1
 STC_3105_CTRL_address        LITERAL1
